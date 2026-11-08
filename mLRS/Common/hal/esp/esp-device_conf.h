@@ -336,3 +336,15 @@
   #define DEVICE_HAS_SX128x
   #define FREQUENCY_BAND_2P4_GHZ
 #endif
+
+// TTGO T3 V1.6, SX1276, 868 MHz
+#if defined TX_TTGO_T3_V16_868_ESP32 || defined RX_TTGO_T3_V16_868_ESP32
+  #define DEVICE_NAME "TTGO T3 V1.6 868"
+  #define DEVICE_HAS_SX127x
+  #define FREQUENCY_BAND_868_MHZ
+  #ifdef TX_TTGO_T3_V16_868_ESP32
+    #define DEVICE_IS_TRANSMITTER
+  #else
+    #define DEVICE_IS_RECEIVER
+  #endif
+#endif

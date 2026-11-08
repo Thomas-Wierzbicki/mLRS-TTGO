@@ -106,6 +106,20 @@
 #define SETUP_PRIVACY                   0 // 0: off, 1: lvl1, 2: lvl2, 3: lvl3
 
 
+// Defaults only for the experimental TTGO serial-link targets.
+#if defined TX_TTGO_T3_V16_868_ESP32 || defined RX_TTGO_T3_V16_868_ESP32
+#undef BIND_PHRASE
+#define BIND_PHRASE "da1twd"
+#undef SETUP_MODE
+#define SETUP_MODE MODE_19HZ_7X
+#undef SETUP_TX_CHANNELS_SOURCE
+#define SETUP_TX_CHANNELS_SOURCE 0
+#undef SETUP_RX_SERIAL_BAUDRATE
+#define SETUP_RX_SERIAL_BAUDRATE 1
+#undef SETUP_RX_SERIAL_LINK_MODE
+#define SETUP_RX_SERIAL_LINK_MODE 0
+#endif
+
 //-------------------------------------------------------
 // User-adjustable System Configs
 //-------------------------------------------------------

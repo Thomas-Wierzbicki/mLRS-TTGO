@@ -178,3 +178,7 @@
 #include "tx-hal-flysky-int-pa01-2400-esp32s3.h"
 #endif
 
+
+#if defined TX_TTGO_T3_V16_868_ESP32 || defined RX_TTGO_T3_V16_868_ESP32
+#include "hal-ttgo-t3-v16-868-esp32.h"
+#endif
