@@ -276,6 +276,21 @@ uint16_t keys, i, keys_new;
 
     if (!initialized) return;
 
+    #ifdef TX_TTGO_T3_V16_868_ESP32
+    // Automatischer Wechsel der Statusseiten nach 15 Sekunden.
+    static uint16_t auto_page_ticks = 0;
+
+    if (page == PAGE_MAIN && !idx_focused_in_edit) {
+        if (++auto_page_ticks >= 15000) {
+            auto_page_ticks = 0;
+            subpage = (subpage + 1) % SUBPAGE_MAIN_NUM;
+            page_modified = true;
+        }
+    } else {
+        auto_page_ticks = 0;
+    }
+#endif
+
     // keys debounce
     DECc(keys_tick, KEYS_DEBOUNCE_TMO_MS/4);
     if (!keys_tick) {

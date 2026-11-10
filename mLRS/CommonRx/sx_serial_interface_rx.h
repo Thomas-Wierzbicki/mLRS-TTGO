@@ -55,6 +55,9 @@ class tRxSxSerial : public tSerialBase
             return;
         }
         serial->putbuf(buf, len); // send to serial
+#ifdef RX_TTGO_T3_V16_868_ESP32
+        ttgo_rx_display.Receive(buf, len); // copy only; UART data is unchanged
+#endif
     }
 
     void flush(void) override

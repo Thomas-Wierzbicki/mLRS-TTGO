@@ -123,6 +123,8 @@ tRxMavlink mavlink;
 
 tRxMsp msp;
 
+#include "ttgo_rx_display.h"
+
 #include "sx_serial_interface_rx.h"
 
 tRxSxSerial sx_serial;
@@ -565,6 +567,9 @@ INITCONTROLLER_ONCE
     stack_check_init();
 RESTARTCONTROLLER
     init_hw();
+#ifdef RX_TTGO_T3_V16_868_ESP32
+    ttgo_rx_display.Init();
+#endif
     DBG_MAIN(dbg.puts("\n\n\nHello\n\n");)
 
     // startup sign of life
@@ -991,6 +996,11 @@ dbg.puts(s8toBCD_s(stats.last_rssi2));*/
     mavlink.Do();
     msp.Do();
     dronecan.Do();
+
+#ifdef RX_TTGO_T3_V16_868_ESP32
+    ttgo_rx_display.Do(connected(), stats.GetLastRssi(), stats.last_snr1,
+                       stats.GetLQ_rc(), Setup.Rx.SerialLinkMode == SERIAL_LINK_MODE_TRANSPARENT);
+#endif
 
     //-- Store parameters
 
