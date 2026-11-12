@@ -40,6 +40,12 @@ private:
             column = 0;
             new_line = false;
         }
+        // Compact the telemetry prefix only on the OLED. UART keeps the raw record.
+        if (c == ' ' && column == 19 && !memcmp(lines[row], "ID=", 3) &&
+            strspn(lines[row] + 3, "0123456789ABCDEF") == 16) {
+            memmove(lines[row], lines[row] + 13, 6);
+            column = 6;
+        }
         lines[row][column++] = c;
         lines[row][column] = '\0';
         has_text = true;
